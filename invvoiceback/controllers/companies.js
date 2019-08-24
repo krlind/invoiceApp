@@ -14,33 +14,35 @@ const jwt = require('jsonwebtoken')
  3. Returns the companyID that the user has access to
 */
 
-const findCompanyCodesForUser = async (userID) => {
-	console.log(userID)
-	// search for acceess rights
-	const companiesUserHasAccess = await AccessRight.find({userId: userID})
+// const findCompanyCodesForUser = async (userID) => {
+// 	console.log(userID)
+// 	// search for acceess rights
+// 	const companiesUserHasAccess = await AccessRight.find({userId: userID})
 
-	const companyIds = companiesUserHasAccess.map(comp => comp.companyId)
-	return companyIds
+// 	const companyIds = companiesUserHasAccess.map(comp => comp.companyId)
+// 	return companyIds
 	
-}
+// }
 
 
 
 companiesRouter.get('/', async (req, res, next) => {
-
+	console.log('hello get')
 	try{
 		//verify token
-		const decondedToken = jwt.verify(req.token, process.env.SECRET)
+		// const decondedToken = jwt.verify(req.token, process.env.SECRET)
 	
 
-		if(!req.token || !decondedToken.id ){
-			return res.status(401).json({ error: 'token missing or invalid'})
-		}
+		// if(!req.token || !decondedToken.id ){
+		// 	return res.status(401).json({ error: 'token missing or invalid'})
+		// }
 
-		const companyIds = await findCompanyCodesForUser(decondedToken.id)
+		// const companyIds = await findCompanyCodesForUser(decondedToken.id)
 
-		console.log(companyIds)
+		// console.log(companyIds)
+		console.log('comp', req.companyIds)
 
+		const companyIds = await req.companyIds
 
 		const companies = await Company.find({_id: companyIds})
 		res.json(companies.map(company => company.toJSON()))
@@ -63,6 +65,7 @@ companiesRouter.post('/', async (req, res, next) => {
 	const body = req.body
 
   try {
+
 		const decondedToken = jwt.verify(req.token, process.env.SECRET)
 		if(!req.token || !decondedToken.id){
 			return res.status(401).json({ error: 'token missing or invalid'})
@@ -92,17 +95,25 @@ companiesRouter.post('/', async (req, res, next) => {
 					BankName: body.BankName,
 					bicSwift: body.bicSwift
 				}
-			],
-			accessDetails: [
-				{
-					userId: decondedToken.id,
-					role: body.role === undefined ? 'admin' : body.role
-				}
 			]
 		})
 
-		const savedComapny= await newCompany.save()
-		res.json(savedComapny)
+		const savedComapny = await newCompany.save()
+		
+		
+		const savedCompanyId = savedComapny.id
+
+		//CREATE ADMIN RIGHTS FOR THE USER WHO CREATED THE COMPANY
+		//THE ACCCES RIGHT MODEL IS VALIDATING THESE
+		const newAccessRights = new AccessRight({
+			companyId: savedCompanyId,
+			userId: decondedToken.id,
+			accessType: body.role === undefined ? 'admin' : body.role, 
+			createdBy: decondedToken.id
+	
+		})
+		const accessRights = await newAccessRights.save()
+		res.json(accessRights)
 
   } catch (exception) {
   		next(exception)

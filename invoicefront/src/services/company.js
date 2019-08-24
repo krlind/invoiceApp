@@ -5,6 +5,7 @@ const baseUrl = 'http://localhost:3003/api/company'
 
 const getAll = async (user) => {
   const config = { headers: { Authorization: `bearer ${user.token}` } }
+  console.log(config)
   const request = axios.get(baseUrl, config)
   const response = await request
   return response.data

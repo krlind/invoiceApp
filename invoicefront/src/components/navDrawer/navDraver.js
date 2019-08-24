@@ -19,6 +19,14 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
 
+import NavDropDown from '../navDropDown/navDropDown'
+
+
+import { withRouter } from 'react-router-dom'
+
+
+import Modal from '../modal/modal';
+import useModal from '../../hooks/hooks';
 
 
 
@@ -45,7 +53,7 @@ const useStyles = makeStyles(theme => ({
     }),
   },
   menuButton: {
-    marginRight: 36,
+    marginRight: theme.spacing(2)
   },
   hide: {
     display: 'none',
@@ -75,9 +83,10 @@ const useStyles = makeStyles(theme => ({
     },
   },
   toolbar: {
+    
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
     padding: '0 8px',
     ...theme.mixins.toolbar,
   },
@@ -85,12 +94,16 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  
 }));
 
-export default function MiniDrawer(props) {
+function MiniDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+
+ 
+  const {isShowing, toggle} = useModal();
 
   function handleDrawerOpen() {
     setOpen(true);
@@ -120,12 +133,20 @@ export default function MiniDrawer(props) {
             })}
           >
             <MenuIcon />
+
           </IconButton>
           <Typography variant="h6" noWrap>
             Invoice App
           </Typography>
+
+         {/* HERE IS MY DROPDOWN */}
+          <NavDropDown toggle={toggle}/> 
+      
+            
         </Toolbar>
       </AppBar>
+
+      
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
@@ -171,9 +192,15 @@ export default function MiniDrawer(props) {
         
         {props.children}
         
-
+        <Modal
+        isShowing={isShowing}
+        hide={toggle}
+        />
 
       </main>
     </div>
   );
 }
+
+
+export default withRouter(MiniDrawer)

@@ -14,11 +14,11 @@ const getAll = async () => {
 }
 
 const create = async (newSalesInvoice) => {
-	// const config = {
-	// 	headers: { Authorization: token }
-  // }
-  
-  const response = await axios.post(baseUrl, newSalesInvoice) 
+  const user = await JSON.parse(window.localStorage.getItem('userDetails'))
+  const config = { headers: { Authorization: `bearer ${user.token}` } }
+
+  console.log(config)
+  const response = await axios.post(baseUrl, newSalesInvoice, config) 
   return response.data
 }
 

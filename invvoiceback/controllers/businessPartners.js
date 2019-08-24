@@ -4,13 +4,22 @@ const BusinessPartner = require('../models/businessPartner')
 
 
 businessPartnerRouter.get('/', async (req, res, next) => {
-  const businessPartners = await BusinessPartner.find({})
-  res.json(businessPartners.map(bp=> bp.toJSON()))
+  const body = req.body
+
+  try{
+    const businessPartners = await BusinessPartner.find({ companyId: req.companyId})
+    res.json(businessPartners.map(bp=> bp.toJSON()))
+  }catch (exception) {
+    next(exception)
+  }
+
 })
 
 businessPartnerRouter.post('/', async (req, res, next) => {
   const body = req.body
-  console.log(body)
+
+  console.log(req)
+
   try {
     const newBusinessPartner = new BusinessPartner({
         companyId: body.companyId, 
@@ -32,7 +41,7 @@ businessPartnerRouter.post('/', async (req, res, next) => {
         ]
     })
       const savedBusinessPartner = await newBusinessPartner.save()
-      res.json(savedBusinessPartner)
+      res.status(200).json(savedBusinessPartner)
 
   } catch (exception) {
     next(exception)

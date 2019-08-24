@@ -81,6 +81,7 @@ const CreateSalesInvoice = (props) => {
 			...salesInvoice, 
 			businessPartnerId: businessPartner.id,
 			vatNumber: businessPartner.vatNumber,
+			companyId: window.localStorage.getItem('companyId'),
 			contactDetails: [{
 				phoneNumber: businessPartner.contactDetails[0].phoneNumber,
 				emailAddress: businessPartner.contactDetails[0].emailAddress

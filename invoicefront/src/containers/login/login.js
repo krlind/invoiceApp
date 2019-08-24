@@ -5,10 +5,10 @@ import './login.styles.scss'
 
 import loginServices from '../../services/login'
 
+
 const Login = (props) => {
   const [ user, setUser ] = useState({ username: '', password:'' })
 
-  console.log(props)
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('userDetails')

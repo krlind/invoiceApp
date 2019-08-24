@@ -25,7 +25,7 @@ salesInvoiceRouter.post('/', async ( req, res, next ) => {
       invoiceDate: body.invoiceDate,
       dueDate: body.dueDate,
       accountingDate: body.accountingDate,
-      userCreatedBy: body.userCreatedBy,
+      userCreatedBy:  req.userId,
       createdAtDateTime: body.createdAtDateTime,
       invoiceLines: 
         body.lines.map(item => item) 
@@ -39,7 +39,7 @@ salesInvoiceRouter.post('/', async ( req, res, next ) => {
     }) 
 
     const savedInvoice = await newInvoice.save()
-    res.json(savedInvoice)
+    res.status(200).json('successfully created a new invoice')
     
   }catch(exception){
     next(exception)

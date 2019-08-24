@@ -21,6 +21,9 @@ const accessRightsRouter = require('./controllers/accessRights');
 const config = require('./utils/config');
 const middleware = require('./utils/middleware');
 
+const middlewareAuth = require('./utils/middleware.endpoint.auth')
+const companyCodeAuth = require('./utils/middleware.companyCodeAuth')
+
 
 
 console.log('connecting to', config.MONGODB_URI);
@@ -49,16 +52,28 @@ app.use(cors());
 app.use(bodyParser.json());
 // app.use(middleware.requestLogger);
 
+
+app.use('/api/login', loginRouter)
+
+
+
+
 app.use(middleware.tokenExtractor);
 
 
+app.use('/api/salesInvoice', companyCodeAuth.validateAccessForComapnyCode, salesInvoiceRouter)
+app.use('/api/businessPartner/', companyCodeAuth.validateAccessForComapnyCode, businessPartnerRouter)
+
+
+
+
+app.use('/api/company', middlewareAuth.endpointAuth, companiesRouter)
 
 
 app.use('/api/users', usersRouter)
-app.use('/api/login', loginRouter)
-app.use('/api/company', companiesRouter)
-app.use('/api/businessPartner', businessPartnerRouter)
-app.use('/api/salesInvoice', salesInvoiceRouter)
+
+
+
 
 app.use('/api/access', accessRightsRouter)
 

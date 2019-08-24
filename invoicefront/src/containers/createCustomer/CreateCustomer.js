@@ -10,7 +10,6 @@ import businessPartnersServices from '../../services/businessPartners'
 
 const CreateCustomer = (props) => {
 
-	console.log(props)
 
 	const [ newCompany , setNewCompany ] = useState({
 		companyName: '', 
@@ -58,7 +57,7 @@ const CreateCustomer = (props) => {
 		e.preventDefault()
 
 		const customerObject = {
-			companyId: 'dummy id', //change to real companyId 
+			companyId: window.localStorage.getItem('companyId'),
 			businessPartnerName: newCompany.companyName,
 			vatNumber: newCompany.brn,
 			phoneNumber: newCompany.phoneNumber,
@@ -68,12 +67,14 @@ const CreateCustomer = (props) => {
 			streetName: newCompany.streetName,
 			postalCode: newCompany.postalCode,
 		}
+
+		console.log(customerObject)
 		try{
 			await businessPartnersServices.create(customerObject)
-			console.log('success when adding new custoemr')
+			console.log('success when adding new customer')
 		
 		}catch(exception){
-			console.log('error when adding new blog')
+			console.log('error when adding new customer')
 			console.log(exception)
 		}
 	}

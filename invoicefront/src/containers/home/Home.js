@@ -2,10 +2,16 @@ import React, { useState, useEffect } from 'react'
 import comanyServices from '../../services/company.js'
 import DisplayCompanies from './DisplayCompanies'
 
+import Modal from '../../components/modal/modal';
+import useModal from '../../hooks/hooks';
 
+
+import Profile from '../../components/modal/profile'
 
 const Home = (props) => {
 	const [ companies, setComapnies ] = useState([])
+
+	const {isShowing, toggle} = useModal();
 
 	useEffect(() => {
 		const user = JSON.parse(window.localStorage.getItem('userDetails'))
@@ -15,11 +21,12 @@ const Home = (props) => {
 	}, [])
 
 	const redirectToCompPage = (event) => {
-	
 		const path = event.target.value
 		props.history.push(`/comphome/${path}`)	
+		window.localStorage.setItem('companyId', path)
 		
 	}
+
 	
 	return(
     <div className="container w-80">
@@ -32,6 +39,17 @@ const Home = (props) => {
 						redirectToCompPage={redirectToCompPage}
 					/>
 				)}
+
+			{ isShowing &&
+				<Modal>
+					<Profile isShowing={isShowing} toggle={toggle}/> 
+				</Modal>
+				
+			}	
+			<button onClick={toggle}>Show modal</button>
+
+
+
     </div>
 	)
 }

@@ -1,24 +1,28 @@
 import axios from 'axios'
 const baseUrl = 'http://localhost:3003/api/businessPartner'
 
-// let token = null
 
-// const setToken = newToken => {
-//   token = `bearer ${newToken}`
-// }
+
+
 
 const getAll = async () => {
-  const request = axios.get(baseUrl)
+  const companyId = window.localStorage.getItem('companyId')
+  const user = await JSON.parse(window.localStorage.getItem('userDetails'))
+
+
+  const config = { headers: { Authorization: `bearer ${user.token}`, companyId: companyId } }
+  const request = axios.get(baseUrl, config)
   const response = await request
   return response.data
 }
 
 const create = async (newBusinessPartner) => {
-	// const config = {
-	// 	headers: { Authorization: token }
-  // }
+  const user = await JSON.parse(window.localStorage.getItem('userDetails'))
+  const config = { headers: { Authorization: `bearer ${user.token}` } }
+
   
-  const response = await axios.post(baseUrl, newBusinessPartner) 
+  const response = await axios.post(baseUrl, newBusinessPartner, config ) 
+
   return response.data
 }
 

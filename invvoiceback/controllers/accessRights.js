@@ -28,7 +28,7 @@ accessRightsRouter.post('/', async (req, res, next) => {
 		const newAccessRights = new AccessRight({
       companyId: body.companyId,
       userId: body.userId,
-      accessType: body.accessType,
+      accessType: body.role === undefined ? 'admin' : body.role,
       createdBy: body.createdBy
   
 		})
