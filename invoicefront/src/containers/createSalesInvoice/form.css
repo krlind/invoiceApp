@@ -1,0 +1,14 @@
+.header {
+  background-color: #5CDB95;
+}
+
+
+.table{
+  font-size: 13px;
+}
+
+tr{
+  line-height: 15px;
+  min-height: 15px;
+  height: 15px;
+}
