@@ -1,0 +1,54 @@
+.action-card{
+  margin: 1%; 
+  height: 90px;
+  width: 250px;
+  background-color: white;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(1,1,1, 0.2);
+  border-radius: 5px; 
+  border-left-style: solid;
+  border-left-width: 5px;
+  border-left-color: #05386B;
+  -webkit-box-shadow: 0px 16px 20px 6px rgba(0,0,0,0.1);
+  -moz-box-shadow: 0px 16px 20px 6px rgba(0,0,0,0.1);
+  box-shadow: 0px 16px 20px 6px rgba(0,0,0,0.1);
+
+  &:hover {
+    cursor: pointer;
+    transition: all .2s ease-in-out; 
+    transform: scale(1.05);
+  }
+}
+
+.content{
+  margin-top: 7%; 
+  margin-left: 5%; 
+  display: flex;
+}
+
+.title{
+  align-self: center;
+  margin-left: 5%;
+  margin-right: 2%;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.icon{
+  align-self: center;
+  width: 50px;
+  height: 50px;
+  background: #5CDB95;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-content: center; 
+
+  .icon-img{
+    align-self: center;
+    color: white; 
+    height: 34px;
+    width: 34px; 
+  }
+}
