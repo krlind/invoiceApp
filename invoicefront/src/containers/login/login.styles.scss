@@ -1,15 +1,58 @@
+body{
+  background-color: #5cdb95;
+  // background: radial-gradient(690px at 50% 50%,rgba(92,219,149, .87) 0,rgba(107, 187, 138, 0.87) 100%);
+  // background: radial-gradient(690px at 50% 50%,rgba(9,156,236,.87) 0,rgba(6,109,165,.87) 100%);
+  //  142, 228, 175
+}
+
+.login-container{
+  margin: 100px auto auto auto;
+  min-height: 600px;
+  max-width: 480px;
+  padding-left: 12px;
+  padding-right: 12px;
+
+  // background-color: red;
+}
+
+.form-container{
+  background-color: white;
+  border-color: rgba(14, 14, 14, 0.87);
+  border-width: 10px;
+
+  border-radius: 0.5rem; 
+  min-height: 600px;
+  width: 100%;
+  height: 100%;
+  padding: 3px;
+  
+}
+
 .login-form{
-  width: 30%;
-  background-color: #ffffff;
-  margin: 200px auto auto auto;
+  margin: auto auto auto auto;
+  padding: 6px;
+  min-height: 586px;
+  width: 99%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+}
+.login-logo{
+  margin-top: 2rem; 
 }
 
 h4{
-  margin-top: 2rem; 
+  margin-top: 3rem; 
+  margin-bottom: 2rem;
+  line-height: 170%;
+  color: #05386b;
+  font-weight: normal;
+}
 
+span{
+  font-weight: bold;
+  font-size: 2rem;
 }
 
 .login-form-items{
@@ -18,22 +61,57 @@ h4{
   align-items: center;
   margin-top: 2rem;
   margin-bottom: 2rem;
-  width: 99%;
+  min-width: 320px;
+  width: 100%;
+
+
 }
 
 .login-item {
-  width: 90%;
-  
+  margin-bottom: 2rem;
+  width: 100%;
+  font-size: 1px;
+} 
 
-  // display: flex;
-  // align-items: block;
-  // border-bottom-style: solid;
-  // border-width: 1px;
-  // border-color: lightgrey;
-  // margin-bottom: 1rem;
-  font-family: "Arial";
-  font-size: 10px;
+.footer-options{
+  color: #05386b;
+  font-weight: 900;
+  width: 65%;
+  margin: 60px auto auto auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 13px;
+
+  .h6{
+    font-size: 1px;
+    background-color: red;
+  }
+  
 }
+.footer-options#h6{
+  font-size: 1px;
+}
+
+.button{
+  width: 50%;
+  height: 2rem;
+  color: white; 
+  font-size: 13px;
+  border-radius: 0.2rem;
+  border: none;  
+  background-color: #05386b;
+}
+
+//   // display: flex;
+//   // align-items: block;
+//   // border-bottom-style: solid;
+//   // border-width: 1px;
+//   // border-color: lightgrey;
+//   // margin-bottom: 1rem;
+//   font-family: "Arial";
+//   font-size: 10px;
+// }
 
 // .invoice-item-text{
 //   width: 30%;

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 
 import TextField from '@material-ui/core/TextField';
+import DeveloperModeIcon from '@material-ui/icons/DeveloperMode';
+import Button from '@material-ui/core/Button';
 import './login.styles.scss'
 
 import loginServices from '../../services/login'
@@ -45,39 +47,52 @@ const Login = (props) => {
   }
   
   return(
-    <div className="login-form">
-    <form onSubmit={handleLogin}>
+    <div className="login-container">
+      <div className="form-container">
+        <div className="login-form">
 
-    <h4>Login into the Invoice App</h4>
- 
-    <div className="login-form-items">
-      <TextField
-        id="standard-name1"
-        className="login-item"
-        label="Enter Username"
-        type="text"
-        name="username" 
-        value={user.username}
-        onChange={onChange}
-        margin="dense"
-      />
-      
+          <form onSubmit={handleLogin}>
 
-    <TextField
-        id="standard-name2"
-        className="login-item"
-        type="password"
-        label="Enter Password"
-        name="password" 
-        value={user.password}
-        onChange={onChange}
-        margin="dense"
-      />
-    </div>
+          <DeveloperModeIcon className="login-logo"/> 
 
-    <button type="submit">login</button>
-    </form>
+          <h4>Sign in with your
+            <br/>
+          <span> Email</span>
+          </h4>
 
+          <div className="login-form-items">
+            <TextField
+              className="login-item"
+              label="Enter Username"
+              type="text"
+              name="username" 
+              value={user.username}
+              onChange={onChange}
+              margin="normal"
+            />
+            
+            <TextField
+                className="login-item"
+                type="password"
+                label="Enter Password"
+                name="password" 
+                value={user.password}
+                onChange={onChange}
+                margin="normal"
+              />
+            </div>
+
+          
+
+            <button className="button" type="submit">Login</button>
+            </form>
+            <div className="footer-options">
+                <h6>Forgot Password?</h6>
+                <h6>Create Account?</h6>
+            </div>
+
+        </div>
+      </div>
     </div>
   )
 }
