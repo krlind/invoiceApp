@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 
 import TextField from '@material-ui/core/TextField';
 import DeveloperModeIcon from '@material-ui/icons/DeveloperMode';
-import Button from '@material-ui/core/Button';
 import './login.styles.scss'
 
 import loginServices from '../../services/login'
@@ -33,8 +32,6 @@ const Login = (props) => {
       })
       setUser(loginUser)
 
-      console.log(loginUser)
-      
       window.localStorage.setItem(
         'userDetails', JSON.stringify(loginUser)
       )
@@ -53,44 +50,42 @@ const Login = (props) => {
 
           <form onSubmit={handleLogin}>
 
-          <DeveloperModeIcon className="login-logo"/> 
+            <DeveloperModeIcon className="login-logo"/> 
 
-          <h4>Sign in with your
-            <br/>
-          <span> Email</span>
-          </h4>
+            <h4>
+              Sign in with your
+              <br/>
+              <span> Email</span>
+            </h4>
 
-          <div className="login-form-items">
-            <TextField
-              className="login-item"
-              label="Enter Username"
-              type="text"
-              name="username" 
-              value={user.username}
-              onChange={onChange}
-              margin="normal"
-            />
-            
-            <TextField
+            <div className="login-form-items">
+              <TextField
                 className="login-item"
-                type="password"
-                label="Enter Password"
-                name="password" 
-                value={user.password}
+                label="Enter Username"
+                type="text"
+                name="username" 
+                value={user.username}
                 onChange={onChange}
                 margin="normal"
               />
+              
+              <TextField
+                  className="login-item"
+                  type="password"
+                  label="Enter Password"
+                  name="password" 
+                  value={user.password}
+                  onChange={onChange}
+                  margin="normal"
+                />
             </div>
-
-          
 
             <button className="button" type="submit">Login</button>
-            </form>
+          </form>
             <div className="footer-options">
                 <h6>Forgot Password?</h6>
-                <h6>Create Account?</h6>
+                <h6 className="login-item-border">Create Account?</h6>
             </div>
-
         </div>
       </div>
     </div>

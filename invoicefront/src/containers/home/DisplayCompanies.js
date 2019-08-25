@@ -1,27 +1,30 @@
 import React from 'react'
-import Jumbotron from 'react-bootstrap/Jumbotron'
-import Button from 'react-bootstrap/Button'
+
+
+import './DisplayCompanies.style.scss'
 
 const DisplayCompanies = (props) => {
 
 	return(
-		<div className="d-inline-block">
-				<Jumbotron className="text-center m-3">
+		<div className="display-company-card">
+			<div className="company-content">
+				<div className="company-title">
 					<h4>{props.companies.companyName}</h4>
-					<hr/>
-					<p> Send Invoices and do fun stuff </p>
-					<p>
-						<Button 
-							value={props.companies.id}
-							variant="primary"
-							onClick={props.redirectToCompPage}
-						>
-							Start
-						</Button>
-					</p>
-				</Jumbotron>
+				</div>
+				<p> Send Invoices and do fun stuff </p>
+				<button
+					className="button-company"
+					value={props.companies.id}
+					variant="primary"
+					onClick={props.redirectToCompPage}
+				>
+					Start
+				</button>
+			</div>					
 		</div>
+
 	)
 }
 
 export default DisplayCompanies
+

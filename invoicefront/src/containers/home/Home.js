@@ -6,6 +6,9 @@ import Modal from '../../components/modal/modal';
 import useModal from '../../hooks/hooks';
 
 
+import './Home.style.scss'
+
+
 import Profile from '../../components/modal/profile'
 
 const Home = (props) => {
@@ -29,25 +32,39 @@ const Home = (props) => {
 
 	
 	return(
-    <div className="container w-80">
-			<h1 className="text-center h4 mb-4">Select the company</h1>
+    <div className="page-container">
 
-				{companies.map(company =>
-					<DisplayCompanies
-						key={company.id}
-						companies={company}
-						redirectToCompPage={redirectToCompPage}
-					/>
-				)}
+			<div className="page-item">	
+				<div className="page-item-company-card">
+					<h1>Select a company</h1>
+					<hr/>
+					<div className="display-card">
+						{companies.map(company =>
+							<DisplayCompanies
+								key={company.id}
+								companies={company}
+								redirectToCompPage={redirectToCompPage}
+							/>
+						)}
+					</div>
+				</div>
+			</div>
 
-			{ isShowing &&
-				<Modal>
-					<Profile isShowing={isShowing} toggle={toggle}/> 
-				</Modal>
-				
-			}	
-			<button onClick={toggle}>Show modal</button>
+			<div className="page-item">	
+				<div className="page-item-latest-features">	
+					<h1>Latest Features and How to guides</h1>
+					<hr/>
+				</div>
+			</div>
 
+ 
+ 			{ isShowing &&
+ 				<Modal>
+ 					<Profile isShowing={isShowing} toggle={toggle}/> 
+ 				</Modal>
+		
+ 			}	
+ 			<button onClick={toggle}>Show modal</button>
 
 
     </div>

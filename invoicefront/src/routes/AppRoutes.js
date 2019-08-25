@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import ProtectedRoute from './protected.route'
 
 import Home from '../containers/home/Home'
-import CreateCustomer from '../containers/createCustomer/CreateCustomer'
+import CustomerMasterData from '../containers/createCustomer/CustomerMasterData'
 import CreateSalesInvoice from '../containers/createSalesInvoice/CreateSalesInvoice'
 import CreatePurchaseInvoice from '../containers/createPurchaseInvoice/CreatePurchaseInvoice'
 import Login from '../containers/login/login'
@@ -20,7 +20,7 @@ const AppRoutes = (
 
     <MiniDrawer>
       <ProtectedRoute path='/home' component={Home} /> 
-      <ProtectedRoute path='/createCustomer/:id' component={CreateCustomer} />
+      <ProtectedRoute path='/CustomerMasterData/:id' component={CustomerMasterData} />
       <ProtectedRoute path='/createSalesInvoice/:id' component={CreateSalesInvoice} />
       <ProtectedRoute path='/createPurchaseInvoice/:id' component={CreatePurchaseInvoice} />
       <ProtectedRoute path='/comphome/:id' component={CompanyHomePage} /> 

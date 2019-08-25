@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+
 
 
 import businessPartnersServices from '../../services/businessPartners'
 
-// import { useForm } from '.../hooks/hooks.js'
+import './CreateCustomer.style.scss'
+
+import TexinputComponent from '../../components/inputs/textInput.component'
 
 
 const CreateCustomer = (props) => {
-
-
 	const [ newCompany , setNewCompany ] = useState({
 		companyName: '', 
 		brn: '',
@@ -24,8 +23,6 @@ const CreateCustomer = (props) => {
 	const onChange = (e) => {
 		setNewCompany({...newCompany,  [e.target.name]: e.target.value })
 	}
-
-
 
 	const onPrhSubmit = (e) => {
 		e.preventDefault()
@@ -68,7 +65,6 @@ const CreateCustomer = (props) => {
 			postalCode: newCompany.postalCode,
 		}
 
-		console.log(customerObject)
 		try{
 			await businessPartnersServices.create(customerObject)
 			console.log('success when adding new customer')
@@ -79,117 +75,81 @@ const CreateCustomer = (props) => {
 		}
 	}
 
-	//container w-75 border border-dark"
+
 	return(
-		<div className="container w-50 mt-20">
-			<div className="">
-			<h1 className="text-center h4 mb-4">Create a new Customer</h1>
-			<hr/>
-			<Form >
-				<Form.Group className="w-80">
-					<Form.Label>Offical Company Name</Form.Label>
-					<Form.Control 
-						type="text" 
-						name="companyName"
-						placeholder="Enter the Offical Company Name"
-						value={newCompany.companyName} 
-						onChange={onChange}
-					/>
-				</Form.Group>
+    <div className="new-customer-form">
+			<div className="form-items">	
 
-				<div className="d-flex justify-content-center">
-					<Form.Row className="w-100 d-flex justify-content-center" >
-						<Form.Group className="w-75">
-							<Form.Label>Business Registration Number</Form.Label>
-							<Form.Control 
-								type="text" 
-								name="brn"
-								placeholder="Enter Business Registration number" 
-								onChange={onChange}
-								value={newCompany.brn}
-							/>
-						</Form.Group>
+      <h2>Create a new Customer</h2>
 
-						<Form.Group className="bg-secondary">
-							<Button variant="primary" type="submit" onClick={onPrhSubmit}>
-								Import from PRH
-							</Button>
-						</Form.Group>
-					</Form.Row>
-				</div>
+      <TexinputComponent
+        className="form-item-customer"
+        text="Offical Company Name"  
+        name="companyName"
+        value={newCompany.companyName} 
+        onChange={onChange}
+      />
+      <div className="customer-prh-row">
+        <TexinputComponent
+          text="Business Registration Number"  
+          name="brn"
+          value={newCompany.brn} 
+          onChange={onChange}
+        />
 
-				<div className="d-flex justify-content-center">
-					<Form.Row className="w-100" >
-						<Form.Group className="w-50 ">
-							<Form.Label>Phone number</Form.Label>
-							<Form.Control 
-								type="text" 
-								placeholder="Enter Phone Number" 
-								name="phoneNumber"
-								onChange={onChange}
-								value={newCompany.phoneNumber}
-							/>
-						</Form.Group>
-						<Form.Group className="w-50">
-							<Form.Label>Email Address </Form.Label>
-							<Form.Control 
-								type="text" 
-								placeholder="Enter Emaill Address" 
-								name="emailAddress"
-								onChange={onChange}
-								value={newCompany.emailAddress}
-							/>
-						</Form.Group>
-					</Form.Row>
-				</div>
+        <button 
+          className="button-customer-prh"
+          type="submit" 
+          onClick={onPrhSubmit}>
+          Import from PRH
+        </button>
+      </div>
+      <h4>Contact Details</h4>
+    
+      <TexinputComponent
+          text="Phone number"  
+          name="phoneNumber"
+          value={newCompany.phoneNumber} 
+          onChange={onChange}
+      />
 
-				<Form.Group className="w-100">
-					<Form.Label>Street Name</Form.Label>
-					<Form.Control 
-							type="text" 
-							placeholder="Enter Street Name" 
-							name="streetName"
-							value={newCompany.streetName}
-							onChange={onChange}
+      <TexinputComponent
+          text="Email Address"  
+          name="emailAddress"
+          value={newCompany.emailAddress} 
+          onChange={onChange}
+      />
+      <h4>Address Details</h4>
+   
+      <TexinputComponent
+        text="Street Name"  
+        name="streetName"
+        value={newCompany.streetName} 
+        onChange={onChange}
+      />
 
-					/>
-				</Form.Group>
+      <TexinputComponent
+        text="City Name"  
+        name="cityName"
+        value={newCompany.cityName} 
+        onChange={onChange}
+      />
 
-				<div className="d-flex justify-content-center">
-					<Form.Row className="w-100">
-						<Form.Group className="w-50">
-							<Form.Label>City Name</Form.Label>
-							<Form.Control 
-								type="text" 
-								placeholder="Enter City Name" 
-								name="cityName"
-								value={newCompany.cityName}
-								onChange={onChange}
+      <TexinputComponent
+        text="Postal Code"  
+        name="postalCode"
+        value={newCompany.postalCode} 
+        onChange={onChange}
+      />
 
-							/>
-						</Form.Group>
-
-						<Form.Group className="w-50">
-							<Form.Label>Postal Code</Form.Label>
-							<Form.Control 
-								type="text" 
-								placeholder="Enter Postal Code" 
-								name="postalCode"
-								onChange={onChange}
-								value={newCompany.postalCode}
-							/>
-						</Form.Group>
-					</Form.Row>
-				</div>
-
-				<Button 
-					variant="btn btn-primary btn-lg btn-block mt-2" 
-					type="submit"
-					onClick={addNewCustomer}
-				>
-					Add a New Customer
-				</Button>
-		</Form>
+      <button 
+          className="button-customer-submit"
+          type="submit"
+          onClick={addNewCustomer}
+        >
+          Add a New Customer
+      </button>
+	
 		</div>
 	</div>
 	)

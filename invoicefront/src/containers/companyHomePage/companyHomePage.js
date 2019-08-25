@@ -12,14 +12,14 @@ const CompanyHomePage = (props) => {
       {
         routeName: 'createACustomer',
         routeDesciption: 'Create a new Customer',
-        path: '/createCustomer',
+        path: '/CustomerMasterData',
         routeType: 'actions',
         domain: 'customer'
       }, 
       {
         routeName: 'displayCustomers',
         routeDesciption: 'Display Customers',
-        path: '/displayCustomer',
+        path: '/CustomerMasterData',
         routeType: 'actions',
         domain: 'customer'
       }, 
@@ -49,20 +49,26 @@ const CompanyHomePage = (props) => {
 
 		return (
 			<div className="page-container">
-        <h1> Company Name </h1>
-        <div className="page-dashboard">Here should be a dashboard</div>
-        <hr/>
 
-        <div className="page-item-quick-actions"> 
-          <h1> Quick Actions </h1>
+        <div className="page-item">	
+          <h1> Company Name </h1>
           <hr/>
+          <div className="page-dashboard">Here should be a dashboard</div>
 
-          <div className="quick-actions"> 
-          {routesData.map( ({ routeName, ...other }) => 
-            <ActionCard key={routeName} { ...other }/>
-          )}
+        </div>
+
+        <div className="page-item">	
+          <div className="page-item-quick-actions"> 
+            <h1> Quick Actions </h1>
+            <hr/>
+            <div className="quick-actions"> 
+              {routesData.map( ({ routeName, ...other }) => 
+                <ActionCard key={routeName} { ...other }/>
+              )}
+            </div>
           </div>
         </div>
+
 			</div>
 		);
 	}
