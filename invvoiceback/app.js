@@ -36,28 +36,15 @@ mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true })
     console.log('error connecting to mongobd', err.message);
   });
 
-const requestLogger = (request, response, next) => {
-  console.log('Method:', request.method);
-  console.log('Path:  ', request.path);
-  console.log('Body:  ', request.body);
-  console.log('---');
-  next();
-};
 
-const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: 'unknown endpoint' });
-};
+
 
 app.use(cors());
 app.use(bodyParser.json());
-// app.use(middleware.requestLogger);
+app.use(middleware.requestLogger);
 
 
 app.use('/api/login', loginRouter)
-
-
-
-
 app.use(middleware.tokenExtractor);
 
 
@@ -65,21 +52,16 @@ app.use('/api/salesInvoice', companyCodeAuth.validateAccessForComapnyCode, sales
 app.use('/api/businessPartner/', companyCodeAuth.validateAccessForComapnyCode, businessPartnerRouter)
 
 
-
-
 app.use('/api/company', middlewareAuth.endpointAuth, companiesRouter)
-
-
 app.use('/api/users', usersRouter)
 
-
-
-
+//MIKSI ACCEESS ROUTE EI OLE SUOJATTTU!!!! teee company creatin oma end point
 app.use('/api/access', accessRightsRouter)
 
 
-// app.use(middleware.errorHandler);
-// app.use(middleware.unknownEndpoint);
+app.use(middleware.unknownEndpoint);
+app.use(middleware.errorHandler);
+
 
 
 module.exports = app

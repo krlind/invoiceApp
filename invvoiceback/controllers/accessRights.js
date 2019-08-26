@@ -9,6 +9,7 @@ accessRightsRouter.get('/', async (req, res, next) => {
     const accessRights = await AccessRight.find({})
     res.json(accessRights.map(rights => rights.toJSON()))
   }catch(exception){
+    next(exception)
     console.log(exception)
   }
 })

@@ -4,8 +4,6 @@ const BusinessPartner = require('../models/businessPartner')
 
 
 businessPartnerRouter.get('/', async (req, res, next) => {
-  const body = req.body
-
   try{
     const businessPartners = await BusinessPartner.find({ companyId: req.companyId})
     res.json(businessPartners.map(bp=> bp.toJSON()))
@@ -17,9 +15,7 @@ businessPartnerRouter.get('/', async (req, res, next) => {
 
 businessPartnerRouter.post('/', async (req, res, next) => {
   const body = req.body
-
-  console.log(req)
-
+  
   try {
     const newBusinessPartner = new BusinessPartner({
         companyId: body.companyId, 

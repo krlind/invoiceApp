@@ -27,21 +27,8 @@ const jwt = require('jsonwebtoken')
 
 
 companiesRouter.get('/', async (req, res, next) => {
-	console.log('hello get')
+	console.log('---company get----')
 	try{
-		//verify token
-		// const decondedToken = jwt.verify(req.token, process.env.SECRET)
-	
-
-		// if(!req.token || !decondedToken.id ){
-		// 	return res.status(401).json({ error: 'token missing or invalid'})
-		// }
-
-		// const companyIds = await findCompanyCodesForUser(decondedToken.id)
-
-		// console.log(companyIds)
-		console.log('comp', req.companyIds)
-
 		const companyIds = await req.companyIds
 
 		const companies = await Company.find({_id: companyIds})

@@ -8,7 +8,7 @@ usersRouter.get('/', async (req, res, next) => {
     const users = await User.find({})
     res.json(users.map(user => user.toJSON()))
   }catch (exception) {
-  next(exception)
+    next(exception)
 }
 
 })

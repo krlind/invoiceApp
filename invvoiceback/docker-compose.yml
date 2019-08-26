@@ -1,0 +1,24 @@
+version: '3.7'
+services:
+  invoicebackend:
+    container_name: nodebackend
+    image: node:12.9.0
+    #docker-compose down && docker-compose build --no-cache && docker-compose up
+    #the bcrypt package has to be uninstalled and installed a gain differences between linux and mac?
+    command: bash -c "npm uninstall bcrypt && npm install bcrypt && npm run watch"
+    working_dir: /app/invoiceback
+    volumes:
+      - ./:/app
+    environment:
+      REDIS_URI: redis://redis:6379
+    env_file:
+    - .env
+    ports:
+      - "3003:3003"
+  
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"
+
