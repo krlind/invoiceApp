@@ -41,10 +41,16 @@ const errorHandler = (error, request, response, next) => {
     response.status(401).json({ error: 'user unautorized' })
   } else if (error.message === 'badRequest'){
     response.status(400).json({ error: 'validation error' })
+  } else if (error.message === 'authFailed'){
+    response.status(401).json({ error: 'invalid username or password' })
+  }else if (error.message === 'invalidFormSubmission' || error.name === 'ReferenceError'){
+    response.status(400).json({ error: 'incorrect form submission' })
   }
 
+
+
   console.error('-----------------------------------------')
-  console.error('error handling:', error.message || error )
+  console.error('error handling:',  error  || error.message )
   console.error('-----------------------------------------')
 
   next(error)
